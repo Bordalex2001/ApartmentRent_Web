@@ -1,4 +1,4 @@
-package сom.rentalapp.repositories;
+package com.rentalapp.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
