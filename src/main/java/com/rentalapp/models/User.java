@@ -1,14 +1,25 @@
 package com.rentalapp.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	private String userName;
 	private String email;
 	private String password;
 	private String role;
 	private float rating;
 
-	public User(int id, String userName, String email, String password, String role, float rating) {
+	public User(Long id, String userName, String email, String password, String role, float rating) {
 		this.id = id;
 		this.userName = userName;
 		this.email = email;
@@ -17,11 +28,11 @@ public class User {
 		this.rating = rating;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
