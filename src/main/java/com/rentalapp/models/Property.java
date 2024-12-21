@@ -1,5 +1,7 @@
 package com.rentalapp.models;
 
+import java.util.List;
+
 public class Property {
 	private int id;
 	private int landlordId;
@@ -8,9 +10,10 @@ public class Property {
 	private float price;
 	private String location;
 	private String status;
+	private List<PropertyImage> images;
 	
 	public Property(int id, int landlordId, String title, String description, float price, String location,
-			String status) {
+			String status, List<PropertyImage> images) {
 		this.id = id;
 		this.landlordId = landlordId;
 		this.title = title;
@@ -18,6 +21,7 @@ public class Property {
 		this.price = price;
 		this.location = location;
 		this.status = status;
+		this.images = images;
 	}
 
 	public int getId() {
@@ -74,5 +78,13 @@ public class Property {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public List<PropertyImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<PropertyImage> images) {
+		this.images = images;
 	}
 }

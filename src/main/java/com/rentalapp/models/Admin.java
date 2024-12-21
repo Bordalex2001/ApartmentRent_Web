@@ -1,23 +1,30 @@
 package com.rentalapp.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "admins")
 public class Admin extends User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="Id")
 	private Long id;
 	
+	@Column(name="AccessLevel", insertable=false, updatable=false)
 	private String accessLevel;
+	
+	@Column(name="Permissions", insertable=false, updatable=false)
 	private String permissions;
 
-	public Admin(Long id, String accessLevel, String permissions, Long userId, String userName, String email, String password, String role, float rating) {
-		super(userId, userName, email, password, role, rating);
+	public Admin() {
+		super();
+	}
+
+	public Admin(Long id, String accessLevel, String permissions, Long userId, String firstName, String lastName, String email, String password, float rating) {
+		super(userId, firstName, lastName, email, password, UserRole.ADMIN, rating);
 		this.id = id;
 		this.accessLevel = accessLevel;
 		this.permissions = permissions;

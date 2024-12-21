@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/header-style.css}">
+    <link rel="stylesheet" th:href="@{/css/footer-style.css}">
+    <link rel="stylesheet" th:href="@{/css/main-style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <div class="main-filters py-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-auto filter-button">
+                    <button class="btn btn-primary">Арендовать квартиру</button>
+                </div>
+                <div class="col-auto d-md-none">
+                    <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#filtersMenu" aria-expanded="false" aria-controls="filtersMenu">
+                        Фильтры
+                    </button>
+                </div>
+                <div class="col-auto d-none d-md-flex filters">
+                    <select class="form-select">
+                        <option>Цена</option>
+                        <option value="low-to-high">От дешевых к дорогим</option>
+                        <option value="high-to-low">От дорогих к дешевым</option>
+                    </select>
+                    <select class="form-select">
+                        <option>Комнаты</option>
+                        <option value="1">1 комната</option>
+                        <option value="2">2 комнаты</option>
+                        <option value="3">3+ комнаты</option>
+                    </select>
+                    <select class="form-select">
+                        <option>Площадь</option>
+                        <option value="small">До 50 м²</option>
+                        <option value="medium">50-100 м²</option>
+                        <option value="large">Больше 100 м²</option>
+                    </select>
+                    <div class="dropdown-multiselect">
+                        <button class="dropdown-toggle" onclick="toggleDropdown()">
+                            Фильтры
+                            <img th:src="@{/photo/main-file/down.svg}" alt="Dropdown Arrow" class="dropdown-icon">
+                        </button>
+                        <div class="dropdown-menu">
+                            <label>
+                                <input type="checkbox" value="kyiv"> Київ
+                            </label>
+                            <label>
+                                <input type="checkbox" value="odessa"> Одеса
+                            </label>
+                            <label>
+                                <input type="checkbox" value="lviv"> Львів
+                            </label>
+                            <label>
+                                <input type="checkbox" value="kharkiv"> Харків
+                            </label>
+                            <label>
+                                <input type="checkbox" value="dnipro"> Дніпро
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse mt-3 d-md-none filters" id="filtersMenu">
+                    <div class="card card-body">
+                        <select class="form-select mb-2">
+                            <option>Цена</option>
+                            <option value="low-to-high">От дешевых к дорогим</option>
+                            <option value="high-to-low">От дорогих к дешевым</option>
+                        </select>
+                        <select class="form-select mb-2">
+                            <option>Комнаты</option>
+                            <option value="1">1 комната</option>
+                            <option value="2">2 комнаты</option>
+                            <option value="3">3+ комнаты</option>
+                        </select>
+                        <select class="form-select mb-2">
+                            <option>Площадь</option>
+                            <option value="small">До 50 м²</option>
+                            <option value="medium">50-100 м²</option>
+                            <option value="large">Больше 100 м²</option>
+                        </select>
+                        <div class="dropdown-multiselect">
+                            <button class="dropdown-toggle" onclick="toggleDropdown()">
+                                Фильтры
+                                <img th:src="@{/photo/main-file/down.svg}" alt="Dropdown Arrow" class="dropdown-icon">
+                            </button>
+                            <div class="dropdown-menu">
+                                <label>
+                                    <input type="checkbox" value="kyiv"> Київ
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="odessa"> Одеса
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="lviv"> Львів
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="kharkiv"> Харків
+                                </label>
+                                <label>
+                                    <input type="checkbox" value="dnipro"> Дніпро
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="apartments-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="apartments-title">Аренда квартир в Одессе</h2>
+                    <p class="apartments-subtitle">15 предложений</p>
+                </div>
+                <div class="col-12 buttons-group">
+                    <select class="form-select">
+                        <option value="newest">Сначала Новые</option>
+                        <option value="oldest">Сначала Старые</option>
+                        <option value="price-low">От дешевых к дорогим</option>
+                        <option value="price-high">От дорогих к дешевым</option>
+                    </select>
+                    <button class="btn btn-map">
+                        Смотреть на карте
+                        <img th:src="@{/photo/main-file/minimap-icon.png}" alt="Map Icon" class="icon">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="property-list">
+        <div class="container">
+            <div class="row">
+                <div th:each="property : ${properties}" class="property-row">
+                    <div class="property-images">
+                        <div class="main-image" th:if="${property.images != null and property.images.size() > 0}">
+                            <img th:src="${property.images[0].imageUrl}" alt="Main Property Image">
+                        </div>
+                        <div class="additional-images">
+                            <div th:each="image, iterStat : ${property.images}" th:if="${iterStat.index > 0 && iterStat.index < 4}" class="additional-image">
+                                <img th:src="${image.imageUrl}" alt="Additional Property Image" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-text">
+                        <div class="price-container">
+                            <span class="price" th:text="${property.price} + ' грн'"></span>
+                            <div class="icons-wrapper">
+                                <img th:src="@{/photo/main-file/icon1.png}" alt="Icon 1" class="icon">
+                                <img th:src="@{/photo/main-file/icon2.png}" alt="Icon 2" class="icon">
+                            </div>
+                        </div>
+                        <p class="location">
+                            <span th:text="${property.location}"></span>
+                            <img th:src="@{/photo/main-file/location-icon.png}" alt="Location Icon" class="location-icon">
+                        </p>
+                        <p class="details">ЖК Кадор • Аркаія • Приморский • Одеса</p>
+                        <ul class="characteristics">
+                            <li th:text="'Кімнат: 1 • Площа: 28 • Поверх: 2 з 22'"></li>
+                        </ul>
+                        <div class="filter-group">
+                            <p class="filter-object">Поруч з парком</p>
+                            <p class="filter-object">Кухня студія</p>
+                            <p class="filter-object">Індивідуальне опалення</p>
+                        </div>
+                        <p class="description" th:text="${property.description}">Опис об'єкта</p>
+                        <p class="date-obj">Опубліковано 24 жов.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<div class="load-more-container">
+    <button class="btn btn-load-more" onclick="window.location.href='/new-page-url'">Показати ще
+        <img th:src="@{/photo/main-file/load-more-icon.png}" alt="Reload Icon" class="reload-icon">
+    </button>
+</div>
+<div class="load-more-container">
+    <button type="button" class="btn btn-outline-dark rounded-circle btn-lg">1</button>
+    <button type="button" class="btn btn-outline-dark rounded-circle btn-lg">2</button>
+    <button type="button" class="btn btn-outline-dark rounded-circle btn-lg">3</button>
+    <button type="button" class="btn btn-outline-dark rounded-circle btn-lg">...</button>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.querySelector('.dropdown-multiselect');
+        dropdown.classList.toggle('open');
+    }
+
+    document.addEventListener('click', function (event) {
+        const dropdown = document.querySelector('.dropdown-multiselect');
+        if (!dropdown.contains(event.target)) {
+            dropdown.classList.remove('open');
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const dynamicModal = document.getElementById('dynamicModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        let originalOverflow = document.body.style.overflow;
+        let originalPaddingRight = document.body.style.paddingRight;
+
+        const bootstrapModal = new bootstrap.Modal(dynamicModal, {
+            backdrop: true,
+            keyboard: true,
+            focus: true
+        });
+
+        dynamicModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const modalType = button.getAttribute('data-modal-type');
+            loadModalContent(modalType);
+        });
+
+        dynamicModal.addEventListener('shown.bs.modal', function () {
+            document.body.style.overflow = 'visible';
+        });
+
+        dynamicModal.addEventListener('hidden.bs.modal', function () {
+            document.body.style.overflow = originalOverflow;
+        });
+
+        function loadModalContent(modalType) {
+            modalBody.innerHTML = 'Завантаження...';
+
+            let fetchUrl;
+            if (modalType === 'login') {
+                modalTitle.textContent = 'Вхід на сайт';
+                fetchUrl = '/home/login';
+            } else if (modalType === 'registration') {
+                modalTitle.textContent = 'Реєстрація на сайті';
+                fetchUrl = '/home/registration';
+            } else {
+                modalBody.innerHTML = '<p>Невідомий тип модального вікна!</p>';
+                return;
+            }
+
+            fetch(fetchUrl)
+                .then(response => response.text())
+                .then(html => {
+                    modalBody.innerHTML = html;
+                    attachSwitchHandler();
+                })
+                .catch(err => modalBody.innerHTML = '<p>Помилка завантаження!</p>');
+        }
+
+        dynamicModal.addEventListener('shown.bs.modal', function () {
+            originalOverflow = document.body.style.overflow;
+            originalPaddingRight = document.body.style.paddingRight;
+
+            document.body.style.overflow = 'visible';
+            document.body.style.paddingRight = '0px';
+
+            document.body.removeAttribute('tabindex');
+            document.body.style.setProperty('pointer-events', 'auto', 'important');
+        });
+
+        dynamicModal.addEventListener('hidden.bs.modal', function () {
+            document.body.style.overflow = originalOverflow;
+            document.body.style.paddingRight = originalPaddingRight;
+
+            document.body.style.removeProperty('overflow');
+            document.body.style.removeProperty('padding-right');
+            document.body.style.removeProperty('pointer-events');
+
+        });
+
+        window.addEventListener('resize', () => {
+            if (bootstrapModal._isShown) {
+                document.body.style.paddingRight = '0px';
+            }
+        });
+
+        function attachSwitchHandler() {
+            const switchButtons = modalBody.querySelectorAll('.switch-modal');
+            switchButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const targetModalType = this.getAttribute('data-modal-type');
+                    loadModalContent(targetModalType);
+                });
+            });
+        }
+    });
+</script>
+</html>

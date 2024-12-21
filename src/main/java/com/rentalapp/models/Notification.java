@@ -1,5 +1,6 @@
 package com.rentalapp.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,12 +12,22 @@ import jakarta.persistence.Table;
 public class Notification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="Id")
 	private Long id;
 	
+	@Column(name="UserId", insertable=false, updatable=false)
 	private Long userId;
-	private String message;
-	private boolean isRead;
 	
+	@Column(name="Message", insertable=false, updatable=false)
+	private String message;
+	
+	@Column(name="IsRead", insertable=false, updatable=false)
+	private boolean isRead;
+
+	public Notification() {
+
+	}
+
 	public Notification(Long id, Long userId, String message, boolean isRead) {
 		this.id = id;
 		this.userId = userId;

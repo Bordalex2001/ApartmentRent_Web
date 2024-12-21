@@ -1,14 +1,14 @@
 package com.rentalapp.models;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class Chat {
 	private int id;
 	private int firstUserId;
 	private int secondUserId;
-	private LinkedList<Message> messages;
+	private List<Message> messages;
 
-	public Chat(int id, int firstUserId, int secondUserId, LinkedList<Message> messages) {
+	public Chat(int id, int firstUserId, int secondUserId, List<Message> messages) {
 		this.id = id;
 		this.firstUserId = firstUserId;
 		this.secondUserId = secondUserId;
@@ -39,11 +39,11 @@ public class Chat {
 		this.secondUserId = secondUserId;
 	}
 
-	public LinkedList<Message> getMessages() {
+	public List<Message> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(LinkedList<Message> messages) {
+	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
 }

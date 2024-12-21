@@ -1,31 +1,35 @@
 package com.rentalapp.models;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class Landlord extends User {
-	private int id;
-	private LinkedList<Property> properties;
-	
-	public Landlord(int id, LinkedList<Property> properties, int userId, String userName, String email, String password,
-			String role, float rating) {
-		super(userId, userName, email, password, role, rating);
+	private Long id;
+	private List<Property> properties;
+
+	public Landlord() {
+		super();
+	}
+
+	public Landlord(Long id, List<Property> properties, Long userId, String firstName, String lastName,
+			String email, String password, UserRole role, float rating) {
+		super(userId, firstName, lastName, email, password, role, rating);
 		this.id = id;
 		this.properties = properties;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public LinkedList<Property> getProperties() {
+	public List<Property> getProperties() {
 		return properties;
 	}
 
-	public void setProperties(LinkedList<Property> properties) {
+	public void setProperties(List<Property> properties) {
 		this.properties = properties;
 	}
 }
